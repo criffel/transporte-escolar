@@ -96,8 +96,10 @@ if (Auth::check()) {
         header('Location: /motorista/cracha.php');
     } elseif ($perfil === 'escola') {
         header('Location: /inspetor/escanear.php');
+    } elseif ($perfil === 'responsavel') {
+        header('Location: /pai/acompanhar.php');
     } else {
-        header('Location: /login.php');
+        header('Location: /pai/acompanhar.php');
     }
 } else {
     header('Location: /login.php');

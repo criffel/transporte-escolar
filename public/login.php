@@ -13,7 +13,8 @@ if (Auth::check()) {
         'admin', 'operador' => '/admin/index.php',
         'motorista'         => '/motorista/cracha.php',
         'escola'            => '/inspetor/escanear.php',
-        default             => '/login.php',
+        'responsavel'       => '/pai/acompanhar.php',
+        default             => '/pai/acompanhar.php',
     };
     header("Location: $redirect");
     exit;
@@ -31,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (Auth::tentarLogin($login, $senha)) {
             LogAuditoria::registrar('LOGIN', "Usuário {$login} realizou login.");
-            $redirect = match (Auth::perfil()) {
-                'admin', 'operador' => '/admin/index.php',
-                'motorista'         => '/motorista/cracha.php',
-                'escola'            => '/inspetor/escanear.php',
-                'responsavel'       => '/pai/acompanhar.php',
-                default             => '/login.php',
-            };
+    $redirect = match (Auth::perfil()) {
+        'admin', 'operador' => '/admin/index.php',
+        'motorista'         => '/motorista/cracha.php',
+        'escola'            => '/inspetor/escanear.php',
+        'responsavel'       => '/pai/acompanhar.php',
+        default             => '/pai/acompanhar.php',
+    };
             header("Location: $redirect");
             exit;
         } else {
