@@ -26,6 +26,11 @@ if (empty($token)) {
     } else {
         $motoristaId = (int)$dados['motorista_id'];
         $alunos = Aluno::findByMotorista($motoristaId);
+        LogAuditoria::registrar('QR_VALIDADO', "QR Code validado com sucesso.", [
+            'motorista_id' => $motoristaId,
+            'motorista'    => $dados['motorista_nome'],
+            'inspetor'     => Auth::nome() ?? 'desconhecido',
+        ]);
     }
 }
 
