@@ -1,0 +1,61 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: motorista_check_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=motorista_check
+      - DB_USER=motorista_user
+      - DB_PASS=Str0ng!Pass#2024
+      - APP_ENV=development
+      - APP_DEBUG=true
+    depends_on:
+      - db
+    networks:
+      - motorista_network
+
+  db:
+    image: mysql:8.0
+    platform: linux/amd64
+    container_name: motorista_check_db
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=R00t!Pass#2024
+      - MYSQL_DATABASE=motorista_check
+      - MYSQL_USER=motorista_user
+      - MYSQL_PASSWORD=Str0ng!Pass#2024
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - motorista_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    platform: linux/amd64
+    container_name: motorista_check_pma
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - UPLOAD_LIMIT=100M
+    depends_on:
+      - db
+    networks:
+      - motorista_network
+
+networks:
+  motorista_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
