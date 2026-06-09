@@ -271,9 +271,11 @@ INSERT INTO perfis (nome, descricao) VALUES
     ('responsavel', 'Pai ou responsável pelo aluno'),
     ('operador', 'Operador da transportadora');
 
--- Senha: @Admin123 (hash gerado com password_hash)
+-- Senhas: @Admin123, @Escola2024, @Motorista2024 (hashes gerados com password_hash)
 INSERT INTO usuarios (perfil_id, nome, email, login, senha) VALUES
-    (1, 'Administrador Master', 'admin@motoristacheck.com.br', 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+    (1, 'Administrador Master', 'admin@motoristacheck.com.br', 'admin', '$2y$10$fpxxryEOBilfXlaIbhCLrep.pvXHbPmEys9eqVUSJxtNDn2fEdyYi'),
+    (2, 'Inspetor da Escola',   'inspetor@escola.com.br',     'inspetor', '$2y$10$Yjk6VxJCKVCHKi8Xae0BaObOfQSsTZNezxJh12krBm84pJeVLRTMS'),
+    (3, 'Motorista Padrão',     'motorista@transportadora.com', 'motorista', '$2y$10$gO4.1C1Hr24AIzr/z2UkXurIGW4gAEIUruQyFze08CHI1HMReA.eK');
 
 -- Escola padrão
 INSERT INTO escolas (nome, endereco, telefone, contato) VALUES
@@ -282,3 +284,11 @@ INSERT INTO escolas (nome, endereco, telefone, contato) VALUES
 -- Transportadora padrão
 INSERT INTO transportadoras (nome, cnpj, telefone, contato) VALUES
     ('Transportadora Escolar Segura Ltda', '00.000.000/0001-00', '(11) 98888-7777', 'João da Silva');
+
+-- Motorista padrão (vinculado ao usuário motorista + transportadora)
+INSERT INTO motoristas (usuario_id, transportadora_id, cpf, rg, data_nascimento, telefone, status) VALUES
+    (3, 1, '529.982.247-25', '12.345.678-9', '1985-03-15', '(11) 97777-3333', 'autorizado');
+
+-- Veículo padrão
+INSERT INTO veiculos (motorista_id, placa, modelo, cor, ano, capacidade) VALUES
+    (1, 'ABC-1D23', 'Fiat Ducato', 'Branco', 2022, 15);

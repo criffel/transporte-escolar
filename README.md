@@ -88,6 +88,14 @@ Variáveis de ambiente (`.env`):
 | Perfil | Usuário | Senha |
 |--------|---------|-------|
 | Administrador | `admin` | `@Admin123` |
+| Inspetor (Escola) | `inspetor` | `@Escola2024` |
+| Motorista (CPF: 529.982.247-25) | — | Acessa via `identificar.php` |
+
+### Fluxo completo de teste
+
+1. **Inspetor** — login em `/login.php` com `inspetor` / `@Escola2024` → acessa `/inspetor/escanear.php`
+2. **Motorista** — acessa `/motorista/identificar.php`, informa CPF `529.982.247-25` e data `1985-03-15` → gera crachá com QR Code
+3. **Inspetor** — escaneia o QR Code do motorista → valida os dados → autoriza retirada
 
 ## Estrutura do Projeto
 
