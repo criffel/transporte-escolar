@@ -73,7 +73,7 @@ class QrCodeHelper
     public static function gerarQrCodePng(string $data): string
     {
         $options = new QROptions([
-            'version'    => 5,
+            'version'    => -1,
             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
             'eccLevel'   => QRCode::ECC_M,
             'scale'      => 5,
@@ -86,7 +86,7 @@ class QrCodeHelper
     public static function gerarQrCodeSvg(string $data): string
     {
         $options = new QROptions([
-            'version'    => 5,
+            'version'    => -1,
             'outputType' => QRCode::OUTPUT_MARKUP_SVG,
             'eccLevel'   => QRCode::ECC_M,
             'scale'      => 5,
